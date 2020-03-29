@@ -13,4 +13,4 @@ class MoviesService {
 
 const moviesService = new MoviesService();
 
-export default moviesService;
+export default moviesService;   
