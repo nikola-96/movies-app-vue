@@ -6,7 +6,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    movies: []
+    movies: [],
+    searchMovie: '',
+    moviesSelected: 0
+  },
+  getters: {
+    getSelectedMovies: state => {
+      return state.moviesSelected
+    }
   },
   mutations: {
     SET_MOVIES(state, movies) {
@@ -17,7 +24,8 @@ export default new Vuex.Store({
     async loadMovies({ commit }) {
       const movies = await moviesService.getAll();
       commit('SET_MOVIES', movies);
-    }
+    },
+
   },
   modules: {
   }

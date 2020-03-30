@@ -7,20 +7,12 @@
         <b-navbar-nav>
           <b-nav-item href="/movies">Movies</b-nav-item>
           <b-nav-item href="#" disabled>Disabled</b-nav-item>
+          <b-nav-item>Numbers of selected movies: {{ getMoviesSelected }}</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input
-              v-model="movieSearch"
-              size="sm"
-              class="mr-sm-2"
-              placeholder="Search Movie"
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" @click="handleSearch">Search</b-button>
-          </b-nav-form>
-
+          <movie-search />
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template v-slot:button-content>
@@ -35,8 +27,12 @@
 </template>
 
 <script>
+import MovieSearch from "../components/MovieSearch";
 export default {
   name: "NavBar",
+  components: {
+    MovieSearch
+  },
   data() {
     return {
       movieSearch: ""
@@ -45,6 +41,11 @@ export default {
   methods: {
     handleSearch() {
       console.log(this.movieSearch);
+    }
+  },
+  computed: {
+    getMoviesSelected() {
+      return this.$store.state.moviesSelected;
     }
   }
 };
